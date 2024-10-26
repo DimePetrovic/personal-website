@@ -1,0 +1,25 @@
+{
+  "short_name": "React App",
+  "name": "Create React App Sample",
+  "icons": [
+    {
+      "src": "ja.jpg",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logoDimitrije2.png",
+      "type": "image/png",
+      "sizes": "120x76"
+    },
+    {
+      "src": "dimitrijeMidzor.jpg",
+      "type": "image/jpg",
+      "sizes": "600x1002 500x836 400x669 300x501"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
