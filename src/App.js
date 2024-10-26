@@ -1,7 +1,7 @@
 import './App.css';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Home from './Home';
-import { FaLinkedin, FaGithub, FaGitlab, FaEnvelope, FaBars } from 'react-icons/fa'; 
+import { FaLinkedin, FaGithub, FaGitlab, FaEnvelope } from 'react-icons/fa'; 
 import AboutMe from './AboutMe';
 // import MealKitPlatform from './MealKitPlatform';
 // import CoronavirusClassifier from './CoronavirusClassifier';
@@ -17,7 +17,7 @@ function App() {
       <div className="min-h-screen flex flex-col">
         <header className="py-2 w-full bg-slate-300">
           <div className="flex flex-row w-fit gap-x-4 justify-start">
-            <FaBars size={30} title="Menu" className="text-white mt-2 ml-2"/>
+            {/* <FaBars size={30} title="Menu" className="text-white mt-2 ml-2"/> */}
             <Link to="/"><img src="/logoDimitrije2.png" alt="Dimitrije logo" className="w-24"/></Link>
           </div>
         </header>
