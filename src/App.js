@@ -3,12 +3,12 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Home from './Home';
 import { FaLinkedin, FaGithub, FaGitlab, FaEnvelope, FaBars } from 'react-icons/fa'; 
 import AboutMe from './AboutMe';
-import MealKitPlatform from './MealKitPlatform';
-import CoronavirusClassifier from './CoronavirusClassifier';
-import OfficeResourceManagement from './OfficeResourceManagement';
-import HrApplication from './HrApplication';
-import Cambio from './C++ambio';
-import WorldCup2022Simulator from './WorldCup2022Simulator';
+// import MealKitPlatform from './MealKitPlatform';
+// import CoronavirusClassifier from './CoronavirusClassifier';
+// import OfficeResourceManagement from './OfficeResourceManagement';
+// import HrApplication from './HrApplication';
+// import Cambio from './C++ambio';
+// import WorldCup2022Simulator from './WorldCup2022Simulator';
 import { Link } from 'react-router-dom';
 
 function App() {
@@ -25,12 +25,12 @@ function App() {
           <Route>
             <Route index exact path="/" element={<Home/>} />
             <Route path="/about-me" element={<AboutMe/>}/>
-            <Route path="/meal-kit-platform" element={<MealKitPlatform/>}/>
+            {/* <Route path="/meal-kit-platform" element={<MealKitPlatform/>}/>
             <Route path="/coronavirus-classifier" element={<CoronavirusClassifier/>}/>
             <Route path="/office-resource-management" element={<OfficeResourceManagement/>}/>
             <Route path="/hr-application" element={<HrApplication/>}/>
             <Route path="/c++ambio" element={<Cambio/>}/>
-            <Route path="/world-cup-2022-simulator" element={<WorldCup2022Simulator/>}/>
+            <Route path="/world-cup-2022-simulator" element={<WorldCup2022Simulator/>}/> */}
           </Route>
         </Routes>
         <footer className="py-4 w-full bg-slate-300 text-center">
