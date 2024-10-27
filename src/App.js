@@ -25,8 +25,8 @@ function App() {
         </header>
         <Routes>
           <Route>
-            <Route index path="/personal-website" element={<Home/>} />
-            <Route path="/personal-website/about-me" element={<AboutMe/>}/>
+            <Route exact index path="/" element={<Home/>} />
+            <Route path="/about-me" element={<AboutMe/>}/>
             {/* <Route path="/personal-website/meal-kit-platform" element={<MealKitPlatform/>}/>
             <Route path="/personal-website/coronavirus-classifier" element={<CoronavirusClassifier/>}/>
             <Route path="/personal-website/office-resource-management" element={<OfficeResourceManagement/>}/>
