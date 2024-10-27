@@ -1,3 +1,7 @@
+import ImageSlider from "./ImageSlider";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 const AboutMe = () => {
     return ( 
         <div className="grow flex flex-col w-full md:mx-auto md:w-3/4">
@@ -9,7 +13,7 @@ const AboutMe = () => {
 
             <div className="my-16 md:w-3/4 md:mx-auto flex flex-col w-full gap-y-4">
                 <div className="flex flex-col-reverse md:flex-row md:justify-between gap-y-4 md:gap-x-16 md:gap-y-0 mx-1 md:mx-0">
-                    <img src="diplomiranjeOG.jpg" alt="Graduation" className="mx-auto w-[90%] md:w-[45%] md:mx-0"/>
+                    <ImageSlider />
                     <div className="my-auto md:w-[45%]">
                         <p className="text-2xl font-bold">Faculty of Mathematics 2019 - 2024</p>
                         <p className="text-xl">My studies were a wild mix of late-night coding, caffeine overloads, and just enough fun to keep me sane!</p>

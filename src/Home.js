@@ -50,7 +50,7 @@ const Home = () => {
                             <div key={exp.title} className='h-fit flex flex-col shadow-lg md:shadow md:hover:shadow-xl'>
                                 {exp.date && <div className='mt-12 text-xs'>{exp.date}</div>}
                                 {exp.roleName && <h2 className='mt-4 font-semibold'>{exp.roleName}</h2>}
-                                {exp.title && <h2 className='mt-4 font-bold'>{exp.title}</h2>}
+                                {exp.title && <h2 className='mt-4 text-xl font-bold'>{exp.title}</h2>}
                                 {exp.shortDescription && <div className='text-sm font-thin mt-4 md:h-12'>{exp.shortDescription}</div>}
                                 {exp.icons.length > 0 && <div className="mt-4 w-full flex flex-row justify-center gap-4 mx-auto mb-4">
                                     {exp.icons}
