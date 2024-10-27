@@ -20,7 +20,7 @@ function App() {
         <header className="py-2 w-full bg-slate-300">
           <div className="flex flex-row w-fit gap-x-4 justify-start">
             {/* <FaBars size={30} title="Menu" className="text-white mt-2 ml-2"/> */}
-            <Link to="/personal-website"><img src={`${process.env.PUBLIC_URL}/logoDimitrije2.png`} alt="Dimitrije logo" className="w-24 ml-4"/></Link>
+            <Link to="/"><img src={`${process.env.PUBLIC_URL}/logoDimitrije2.png`} alt="Dimitrije logo" className="w-24 ml-4"/></Link>
           </div>
         </header>
         <Routes>
