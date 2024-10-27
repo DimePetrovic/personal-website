@@ -14,7 +14,7 @@ import ScrollToTop from './ScrollToTop';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/">
       <ScrollToTop />
       <div className="min-h-screen flex flex-col">
         <header className="py-2 w-full bg-slate-300">
@@ -25,7 +25,7 @@ function App() {
         </header>
         <Routes>
           <Route>
-            <Route exact index path="/" element={<Home/>} />
+            <Route path="/" element={<Home/>} />
             <Route path="/about-me" element={<AboutMe/>}/>
             {/* <Route path="/personal-website/meal-kit-platform" element={<MealKitPlatform/>}/>
             <Route path="/personal-website/coronavirus-classifier" element={<CoronavirusClassifier/>}/>
