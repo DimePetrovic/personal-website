@@ -17,7 +17,7 @@ const Home = () => {
     return ( 
         <div className="w-full text-center h-fit">
             <div className="w-full pt-4 h-80 md:h-[26rem] bg-slate-300 relative">
-                <img src="/dimitrijeMidzor.jpg" alt="Dimitrije Midzor" className="ml-1 w-48 absolute md:w-64 md:left-1/4"/>
+                <img src={`${process.env.PUBLIC_URL}/dimitrijeMidzor.jpg`} alt="Dimitrije Midzor" className="ml-1 w-48 absolute md:w-64 md:left-1/4"/>
                 <p className="w-[60%] md:w-[35%] absolute top-8 md:top-20 right-0 md:right-[20%] text-5xl md:text-6xl font-extrabold">Hi! I'm Dimitrije Petrović, nice to see you up here!</p>
             </div>
             <div class="h-fit w-full gap-4 mt-8">
