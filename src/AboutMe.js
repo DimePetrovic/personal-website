@@ -11,7 +11,7 @@ const AboutMe = () => {
                 <p className="text-center text-4xl font-semibold">Software engineer</p>
             </div>
 
-            <div className="my-16 md:w-3/4 md:mx-auto flex flex-col w-full gap-y-4">
+            <div className="my-16 md:mx-auto flex flex-col w-full gap-y-4">
                 <div className="flex flex-col-reverse md:flex-row md:justify-between gap-y-4 md:gap-x-16 md:gap-y-0 mx-1 md:mx-0">
                     <ImageSlider />
                     <div className="my-auto md:w-[45%]">

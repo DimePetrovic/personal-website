@@ -11,6 +11,7 @@ import AboutMe from './AboutMe';
 // import WorldCup2022Simulator from './WorldCup2022Simulator';
 import { Link } from 'react-router-dom';
 import ScrollToTop from './ScrollToTop';
+import MealKitPlatform from './MealKitPlatform';
 
 function App() {
   return (
@@ -27,8 +28,8 @@ function App() {
           <Route>
             <Route path="/" element={<Home/>} />
             <Route path="/about-me" element={<AboutMe/>}/>
-            {/* <Route path="/personal-website/meal-kit-platform" element={<MealKitPlatform/>}/>
-            <Route path="/personal-website/coronavirus-classifier" element={<CoronavirusClassifier/>}/>
+            <Route path="/meal-kit-delivery-platform" element={<MealKitPlatform/>}/>
+            {/* <Route path="/personal-website/coronavirus-classifier" element={<CoronavirusClassifier/>}/>
             <Route path="/personal-website/office-resource-management" element={<OfficeResourceManagement/>}/>
             <Route path="/personal-website/hr-application" element={<HrApplication/>}/>
             <Route path="/personal-website/c++ambio" element={<Cambio/>}/>
