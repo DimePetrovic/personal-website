@@ -18,7 +18,7 @@ const Home = () => {
         <div className="w-full text-center h-fit">
             <div className="w-full pt-4 h-80 md:h-[26rem] bg-slate-300 relative">
                 <img src={`${process.env.PUBLIC_URL}/dimitrijeMidzor.jpg`} alt="Dimitrije Midzor" className="ml-1 w-48 absolute md:w-64 md:left-1/4"/>
-                <p className="w-[60%] md:w-[35%] absolute top-8 md:top-20 right-0 md:right-[20%] text-5xl md:text-6xl font-extrabold">Hi! I'm Dimitrije Petrović, nice to see you up here!</p>
+                <p className="w-[58%] md:w-[35%] absolute top-8 md:top-20 right-0 md:right-[20%] text-5xl md:text-6xl font-extrabold">Hi! I'm Dimitrije Petrović, nice to see you up here!</p>
             </div>
             <div class="h-fit w-full gap-4 mt-8">
                 <div className="w-full flex flex-row justify-center gap-4 mx-auto my-4">
@@ -39,6 +39,11 @@ const Home = () => {
                     <p className='text-xl font-bold'>Let me introduce myself</p>
                     <p className="my-2 md:w-2/5 mx-auto">Hey there! I'm Dimitrije Petrović, a 24-year-old software engineering enthusiast with two years of hands-on experience building web applications. I recently graduated from the Faculty of Mathematics in Belgrade in 2024 and decided to keep the brain juices flowing by jumping into master’s studies. I’m all about positive vibes and high energy, so whether I’m tackling code or a challenge, I do it with a smile!</p>
                     <Link to="about-me"><button className='mx-auto my-4 rounded-lg p-2 bg-amber-200 text-xl w-fit'>View more</button></Link>
+                </div>
+                <div className="mx-2 mt-6 shadow-lg md:shadow md:hover:shadow-xl py-2 mb-4">
+                    <p className='text-xl font-bold'>Where learning meets fun!</p>
+                    <p className="my-2 md:w-2/5 mx-auto">Here, you’ll dive into data structures and algorithms through interactive learning, picking up a thing or two along the way, and test your knowledge with a series of engaging challenges - designed to keep both your mind sharp and the experience fun!</p>
+                    <Link to="playground"><button className='mx-auto my-4 rounded-lg p-2 bg-amber-200 text-xl w-fit'>View more</button></Link>
                 </div>
                 <div className='gap-4 mx-2 mb-8 md:grid md:grid-cols-3'>
                     {
