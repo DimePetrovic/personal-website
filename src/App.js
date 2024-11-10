@@ -16,16 +16,23 @@ import Playground from './Playground';
 import NotFound from './NotFound';
 import AVLTreesComponent from './avl-components/AVLTreesComponent';
 import AVLTreesBasics from './avl-components/AVLTreesBasics';
+import { LanguageContext } from './LanguageContext';
+import { useContext } from 'react';
 
 function App() {
+  const { language, toggleLanguage } = useContext(LanguageContext);
+  const footerParagraphSerbian = "Dimitrije Petrović - Softver inženjer";
+  const footerParagraphEnglish = "Dimitrije Petrović - Software Engineer";
+
   return (
     <Router basename="/">
       <ScrollToTop />
       <div className="min-h-screen flex flex-col">
         <header className="py-2 w-full bg-slate-300">
-          <div className="flex flex-row w-fit gap-x-4 justify-start">
+          <div className="flex flex-row w-full justify-between">
             {/* <FaBars size={30} title="Menu" className="text-white mt-2 ml-2"/> */}
             <Link to="/"><img src={`${process.env.PUBLIC_URL}/logoDimitrije2.png`} alt="Dimitrije logo" className="w-24 ml-4"/></Link>
+            <div className="flex flex-row mr-4"><button onClick={() => toggleLanguage('EN')} className={`text-white px-2 text-3xl font-bold ${language === 'EN' ? 'shadow-xl' : ''}`}>EN</button><span className="self-center mx-1 text-white text-3xl font-bold">/</span><button onClick={() => toggleLanguage('SR')} className={`text-white px-2 text-3xl font-bold ${language === 'SR' ? 'shadow-xl' : ''}`}>SR</button></div>
           </div>
         </header>
         <Routes>
@@ -36,8 +43,8 @@ function App() {
             <Route path="/playground" element={<Playground/>}/>
             <Route path="/playground/avl-trees" element={<AVLTreesComponent/>}/>
             <Route path="/playground/avl-trees/basics" element={<AVLTreesBasics/>}/>
-            <Route path="/playground/avl-trees/exercises"/>
-            <Route path="/playground/avl-trees/test"/>
+            {/* <Route path="/playground/avl-trees/exercises"/>
+            <Route path="/playground/avl-trees/test"/> */}
             {/* <Route path="/personal-website/coronavirus-classifier" element={<CoronavirusClassifier/>}/>
             <Route path="/personal-website/office-resource-management" element={<OfficeResourceManagement/>}/>
             <Route path="/personal-website/hr-application" element={<HrApplication/>}/>
@@ -62,7 +69,7 @@ function App() {
                     </a>
             </div>
 
-            <p>© 2024 Dimitrije Petrović. All Rights Reserved.</p>
+            <p>{language === 'EN' ? footerParagraphEnglish : footerParagraphSerbian}</p>
 
             {/* <div className="footer-links">
               <a href="/about">About Me</a>

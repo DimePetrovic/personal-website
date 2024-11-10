@@ -15,7 +15,7 @@ const Playground = () => {
                 </div>
             </div>
 
-            <div className='gap-4 mx-2 mb-8 md:grid md:grid-cols-3'>
+            <div className='flex flex-col gap-4 mx-2 mb-8 md:grid md:grid-cols-3'>
                 <div className="h-fit flex flex-col pb-2 shadow-lg md:shadow md:hover:shadow-xl">
                     <p className='mx-4 mt-4 text-xl font-bold'>AVL Trees</p>
                     <p className="mx-4 mt-4 font-semibold">A place to learn about AVL Trees</p>

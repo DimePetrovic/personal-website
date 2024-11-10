@@ -9,7 +9,7 @@ const AVLTreesComponent = () => {
                 <p className="text-center text-4xl font-semibold">Brainwork & playtime!</p>
             </div>
             <div className="mt-12">
-                <div className='gap-4 mx-2 mb-8 md:grid md:grid-cols-3'>
+                <div className='flex flex-col gap-4 mx-2 mb-8 md:grid md:grid-cols-3'>
                     <div className="h-fit flex flex-col pb-2 shadow-lg md:shadow md:hover:shadow-xl">
                         <p className='mx-4 mt-4 text-xl font-bold'>Learn the Basics</p>
                         <p className="mx-4 mt-4 font-semibold h-20">Get introduced to core concepts and build a solid foundation for deeper understanding</p>
