@@ -16,7 +16,6 @@ const AVLPlayground = () => {
             const newTree = tree.insertValue(num);
             setTree(newTree);
             const {newPositions, newWidth, newHeight} = newTree.getNodePositions();
-            console.log(newPositions, newWidth, newHeight);
             setPositions(newPositions);
             setWidth(newWidth);
             setHeight(newHeight);
@@ -31,13 +30,21 @@ const AVLPlayground = () => {
             const newTree = tree.deleteValue(num);
             setTree(newTree);
             const {newPositions, newWidth, newHeight} = newTree.getNodePositions();
-            console.log(newPositions, newWidth, newHeight);
             setPositions(newPositions);
             setWidth(newWidth);
             setHeight(newHeight);
             setDeleteValue("");
         }
     };
+
+    const handleDeleteTree = () => {
+        setTree(new AVLTree());
+        setValue("");
+        setDeleteValue("");
+        setPositions(null);
+        setWidth(0);
+        setHeight(0);
+    }
 
     return ( 
         <div className="grow flex flex-col w-full">
@@ -65,6 +72,16 @@ const AVLPlayground = () => {
                     placeholder="Unesi broj"
                 />
                 <button onClick={handleDelete} className='rounded-lg p-2 bg-amber-200 text-xl w-24 mx-auto mt-4'>Obriši</button>
+            </div>
+
+            <div className="h-fit flex flex-col pb-2 shadow-lg md:shadow md:hover:shadow-xl my-2 mx-2">
+                <h2 className="mt-6 font-semibold mx-auto text-xl">Obriši drvo</h2>
+                <button onClick={handleDeleteTree} className='rounded-lg p-2 bg-amber-200 text-xl w-24 mx-auto mt-4'>Obriši</button>
+            </div>
+
+            <div className="h-fit flex flex-col pb-2 shadow-lg md:shadow md:hover:shadow-xl my-2 mx-2">
+                <h2 className="mt-6 font-semibold mx-auto text-xl">Generiši drvo</h2>
+                <button onClick={handleDelete} className='rounded-lg p-2 bg-amber-200 text-xl w-24 mx-auto mt-4'>Generiši</button>
             </div>
 
             <div className="overflow-auto">

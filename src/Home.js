@@ -23,7 +23,7 @@ const Home = () => {
                 <img src={`${process.env.PUBLIC_URL}/dimitrijeMidzor.jpg`} alt="Dimitrije Midzor" className="ml-1 w-48 absolute md:w-64 md:left-1/4"/>
                 <p className="w-[58%] md:w-[35%] absolute top-8 md:top-20 right-0 md:right-[20%] text-5xl md:text-6xl font-extrabold">{language === 'EN' ? "Hi! I'm Dimitrije Petrović, nice to see you up here!" : "Zdravo! Ja sam Dimitrije Petrović, dobro došli!"}</p>
             </div>
-            <div class="h-fit w-full gap-4 mt-8">
+            <div className="h-fit w-full gap-4 mt-8">
                 <div className="w-full flex flex-row justify-center gap-4 mx-auto my-4">
                     <a href="https://www.linkedin.com/in/dimitrije-petrovic-90827524b/" target="_blank" rel="noopener noreferrer">
                         <FaLinkedin size={30} />
