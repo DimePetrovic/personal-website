@@ -40,14 +40,7 @@ const AVLPlayground = () => {
     };
 
     return ( 
-        <div className="grow flex flex-col w-full md:mx-auto md:w-3/4">
-            <h1 className="mt-4 text-xl font-bold mx-auto">AVL drveta</h1>
-
-            <div className="">
-                <p className=""></p>
-                <p className=""></p>
-            </div>
-
+        <div className="grow flex flex-col w-full">
             <div className="h-fit flex flex-col pb-2 shadow-lg md:shadow md:hover:shadow-xl my-2 mx-2">
                 <h2 className="mt-6 font-semibold mx-auto text-xl">Umetni novi čvor</h2>
                 <input
