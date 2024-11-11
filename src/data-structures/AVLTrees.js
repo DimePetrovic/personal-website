@@ -113,7 +113,7 @@ class AVLTree {
         this.getNodePositions(node.left, depth + 1, positions, posX - offsetX, widthTracker, maxDepth);
         this.getNodePositions(node.right, depth + 1, positions, posX + offsetX, widthTracker, maxDepth);
     
-        const totalWidth = widthTracker.maxX - widthTracker.minX + 120;
+        const totalWidth = widthTracker.maxX - widthTracker.minX + 220;
         const totalHeight = (maxDepth.value + 1) * 80;
     
         return { newPositions: positions, newWidth: totalWidth, newHeight: totalHeight };

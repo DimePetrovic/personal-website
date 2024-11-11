@@ -41,38 +41,43 @@ const AVLPlayground = () => {
 
     return ( 
         <div className="grow flex flex-col w-full md:mx-auto md:w-3/4">
-            <h1 className="mt-4 text-xl font-bold mx-auto">AVL Tree Playground</h1>
+            <h1 className="mt-4 text-xl font-bold mx-auto">AVL drveta</h1>
+
+            <div className="">
+                <p className=""></p>
+                <p className=""></p>
+            </div>
 
             <div className="h-fit flex flex-col pb-2 shadow-lg md:shadow md:hover:shadow-xl my-2 mx-2">
-                <h2 className="mt-6 font-semibold mx-auto text-xl">Insert new node</h2>
+                <h2 className="mt-6 font-semibold mx-auto text-xl">Umetni novi čvor</h2>
                 <input
                     className="mx-auto py-2 pl-2 rounded-lg border bg-slate-300"
                     type="number"
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
                     onKeyDown={(e) => e.key === 'Enter' && handleInsert()}
-                    placeholder="Enter a number"
+                    placeholder="Unesi broj"
                 />
-                <button onClick={handleInsert} className='rounded-lg p-2 bg-amber-200 text-xl w-24 mx-auto mt-4'>Insert</button>            
+                <button onClick={handleInsert} className='rounded-lg p-2 bg-amber-200 text-xl w-24 mx-auto mt-4'>Umetni</button>            
             </div>
 
             <div className="h-fit flex flex-col pb-2 shadow-lg md:shadow md:hover:shadow-xl my-2 mx-2">
-                <h2 className="mt-6 font-semibold mx-auto text-xl">Delete existing node</h2>
+                <h2 className="mt-6 font-semibold mx-auto text-xl">Obriši postojeći čvor</h2>
                 <input
                     className="mx-auto py-2 pl-2 rounded-lg border bg-slate-300"
                     type="number"
                     value={deleteValue}
                     onChange={(e) => setDeleteValue(e.target.value)}
                     onKeyDown={(e) => e.key === 'Enter' && handleDelete()}
-                    placeholder="Enter a number"
+                    placeholder="Unesi broj"
                 />
-                <button onClick={handleDelete} className='rounded-lg p-2 bg-amber-200 text-xl w-24 mx-auto mt-4'>Delete</button>
+                <button onClick={handleDelete} className='rounded-lg p-2 bg-amber-200 text-xl w-24 mx-auto mt-4'>Obriši</button>
             </div>
 
             <div className="overflow-auto">
                 {   
                     positions &&
-                    <svg width={width} height={height} className="mx-auto" style={{ marginTop: "20px", marginBottom: "20px" }}>
+                    <svg width={width} height={height} className="mx-auto my-[20px]">
                         {positions.map((node, index) => {
                         const leftChild = positions.find(n => n.value === (tree.findNode(tree.root, node.value)?.left?.value));
                         const rightChild = positions.find(n => n.value === (tree.findNode(tree.root, node.value)?.right?.value));
