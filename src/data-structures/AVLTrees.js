@@ -4,6 +4,7 @@ class AVLNode {
         this.left = null;
         this.right = null;
         this.height = 1;
+        this.border = "black";
     }
 }
 
@@ -79,6 +80,49 @@ class AVLTree {
         return newTree;
     }
 
+    insertWithHighlight(value) {
+        let criticalNode = null;
+
+        const insertNode = (node, value) => {
+            if (!node) {
+                const newNode = new AVLNode(value);
+                newNode.border = "green";
+                return newNode;
+            }
+
+            if (value < node.value) {
+                node.left = insertNode(node.left, value);
+            } else if (value > node.value) {
+                node.right = insertNode(node.right, value);
+            } else {
+                return node;
+            }
+
+            this.updateHeight(node);
+
+            const balanceFactor = this.getBalanceFactor(node);
+
+            if (Math.abs(balanceFactor) > 1 && !criticalNode) {
+                criticalNode = node;
+            }
+
+            return node;
+        };
+
+        const newRoot = this.root = insertNode(this.root, value);
+
+        if (criticalNode) {
+            criticalNode.border = "red";
+        }
+
+        const newTree = new AVLTree();
+        newTree.root = newRoot;
+        return {
+            newTree: newTree,
+            hasCriticalNode: Boolean(criticalNode),
+        };
+    }
+
     inOrderTraversal(node = this.root, result = []) {
         if (node !== null) {
           this.inOrderTraversal(node.left, result);
@@ -103,7 +147,7 @@ class AVLTree {
         const offsetX = 150 / Math.pow(1.90, depth);
         const posX = x;
     
-        positions.push({ value: node.value, x: posX, y: depth * 80 });
+        positions.push({ value: node.value, x: posX, y: depth * 80, border: node.border });
     
         widthTracker.minX = Math.min(widthTracker.minX, posX);
         widthTracker.maxX = Math.max(widthTracker.maxX, posX);
@@ -119,8 +163,50 @@ class AVLTree {
         return { newPositions: positions, newWidth: totalWidth, newHeight: totalHeight };
     }
     
+    balanceTree(node) {
+        if (!node) return node;
     
+        node.height = Math.max(this.getHeight(node.left), this.getHeight(node.right)) + 1;
     
+        const balanceFactor = this.getBalanceFactor(node);
+    
+        if (balanceFactor > 1 && this.getBalanceFactor(node.left) >= 0) {
+            return this.rightRotate(node);
+        }
+    
+        if (balanceFactor < -1 && this.getBalanceFactor(node.right) <= 0) {
+            return this.leftRotate(node);
+        }
+    
+        if (balanceFactor > 1 && this.getBalanceFactor(node.left) < 0) {
+            node.left = this.rotateLeft(node.left);
+            return this.rotateRight(node);
+        }
+    
+        if (balanceFactor < -1 && this.getBalanceFactor(node.right) > 0) {
+            node.right = this.rotateRight(node.right);
+            return this.rotateLeft(node);
+        }
+    
+        return node;
+    }
+
+    balanceAfterInsert() {
+        const newTree = new AVLTree();
+        const newRoot = this.root = this.balanceTree(this.root);
+        newTree.root = newRoot;
+        return newTree;
+    }
+    
+
+    resetBorders(node = this.root) {
+        if (!node) return;
+        
+        node.border = "black";
+        
+        this.resetBorders(node.left);
+        this.resetBorders(node.right);
+    }
 
     updateHeight(node) {
         node.height = 1 + Math.max(this.getHeight(node.left), this.getHeight(node.right));

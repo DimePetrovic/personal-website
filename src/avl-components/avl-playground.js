@@ -12,10 +12,35 @@ const AVLPlayground = () => {
     const [isInsertOpen, setIsInsertOpen] = useState(false);
     const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
+
+    const handleBalancing = () => {
+        let balancedTree;
+        setTimeout(function(){
+            balancedTree = tree.balanceAfterInsert();
+            setTree(balancedTree);
+            const {newPositions, newWidth, newHeight} = balancedTree.getNodePositions();
+            setPositions(newPositions);
+            setWidth(newWidth);
+            setHeight(newHeight);
+            setTimeout(function(){
+                balancedTree.resetBorders();
+                setTree(balancedTree);
+                const {newPositions, newWidth, newHeight} = balancedTree.getNodePositions();
+                setPositions(newPositions);
+                setWidth(newWidth);
+                setHeight(newHeight);
+            }, 2000);
+        }, 3000);
+
+
+    }
+
     const handleInsert = () => {
         const num = parseInt(value, 10);
         if (!isNaN(num)) {
-            const newTree = tree.insertValue(num);
+            tree.resetBorders();
+            const {newTree, hasCriticalNode} = tree.insertWithHighlight(num);
+            
             setTree(newTree);
             const {newPositions, newWidth, newHeight} = newTree.getNodePositions();
             setPositions(newPositions);
@@ -24,6 +49,10 @@ const AVLPlayground = () => {
             setValue("");
             setIsDeleteOpen(false);
             setIsInsertOpen(false);
+
+            if(hasCriticalNode){
+                handleBalancing();
+            }
         }
     };
 
@@ -76,7 +105,7 @@ const AVLPlayground = () => {
 
     return ( 
         <div className="grow flex flex-col w-full relative">
-            <div className='hidden gap-4 mx-2 mb-8 md:grid md:grid-cols-2'>
+            <div className='hidden gap-4 mx-2 mb-8 md:grid md:grid-cols-2 mt-2'>
                 <div className="h-fit flex flex-col pb-2 shadow-lg md:shadow md:hover:shadow-xl">
                     <h2 className="mt-6 font-semibold mx-auto text-xl">Umetni novi čvor</h2>
                     <input
@@ -152,7 +181,8 @@ const AVLPlayground = () => {
                             cy={node.y + 20}
                             r="15"
                             fill="lightblue"
-                            stroke="black"
+                            stroke={node.border}
+                            strokeWidth="3"
                             />
                             <text
                             x={node.x + width/2}
@@ -180,6 +210,7 @@ const AVLPlayground = () => {
                             onChange={(e) => setValue(e.target.value)}
                             onKeyDown={(e) => e.key === 'Enter' && handleInsert()}
                             placeholder="Unesi broj"
+                            autoFocus
                         />
                         <button onClick={handleInsert} className='rounded-lg p-2 bg-amber-200 text-xl w-24 mx-auto mt-4'>Umetni</button>            
                     </div>
@@ -194,6 +225,7 @@ const AVLPlayground = () => {
                             onChange={(e) => setDeleteValue(e.target.value)}
                             onKeyDown={(e) => e.key === 'Enter' && handleDelete()}
                             placeholder="Unesi broj"
+                            autoFocus
                         />
                         <button onClick={handleDelete} className='rounded-lg p-2 bg-amber-200 text-xl w-24 mx-auto mt-4'>Obriši</button>
                     </div>
