@@ -171,11 +171,11 @@ class AVLTree {
         const balanceFactor = this.getBalanceFactor(node);
     
         if (balanceFactor > 1 && this.getBalanceFactor(node.left) >= 0) {
-            return this.rightRotate(node);
+            return this.rotateRight(node);
         }
     
         if (balanceFactor < -1 && this.getBalanceFactor(node.right) <= 0) {
-            return this.leftRotate(node);
+            return this.rotateLeft(node);
         }
     
         if (balanceFactor > 1 && this.getBalanceFactor(node.left) < 0) {
