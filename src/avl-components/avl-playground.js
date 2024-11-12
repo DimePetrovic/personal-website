@@ -11,36 +11,43 @@ const AVLPlayground = () => {
     const [height, setHeight] = useState(0);
     const [isInsertOpen, setIsInsertOpen] = useState(false);
     const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+    const [shouldBalance, setShouldBalance] = useState(false);
+    const [isColored, setIsColored] = useState(false);
 
+    const handleResetColoring = () => {
+        let newTree = new AVLTree();
+        newTree.root = tree.root;
+        newTree.resetBorders();
+        setIsColored(false);
+        setTree(newTree);
+        const {newPositions, newWidth, newHeight} = newTree.getNodePositions();
+        setPositions(newPositions);
+        setWidth(newWidth);
+        setHeight(newHeight);
+
+    }
 
     const handleBalancing = () => {
-        let balancedTree;
-        setTimeout(function(){
-            balancedTree = tree.balanceAfterInsert();
-            setTree(balancedTree);
-            const {newPositions, newWidth, newHeight} = balancedTree.getNodePositions();
-            setPositions(newPositions);
-            setWidth(newWidth);
-            setHeight(newHeight);
-            setTimeout(function(){
-                balancedTree.resetBorders();
-                setTree(balancedTree);
-                const {newPositions, newWidth, newHeight} = balancedTree.getNodePositions();
-                setPositions(newPositions);
-                setWidth(newWidth);
-                setHeight(newHeight);
-            }, 2000);
-        }, 3000);
-
-
+        // console.log("Balansiram");
+        // console.log(tree);
+        const balancedTree = tree.balanceAfterInsert();
+        // console.log(balancedTree);
+        setTree(balancedTree);
+        const {newPositions, newWidth, newHeight} = balancedTree.getNodePositions();
+        setPositions(newPositions);
+        setWidth(newWidth);
+        setHeight(newHeight);
+        setShouldBalance(false);
     }
 
     const handleInsert = () => {
         const num = parseInt(value, 10);
         if (!isNaN(num)) {
             tree.resetBorders();
+            setIsColored(false);
             const {newTree, hasCriticalNode} = tree.insertWithHighlight(num);
-            
+            setShouldBalance(hasCriticalNode);
+            setIsColored(true);
             setTree(newTree);
             const {newPositions, newWidth, newHeight} = newTree.getNodePositions();
             setPositions(newPositions);
@@ -49,10 +56,6 @@ const AVLPlayground = () => {
             setValue("");
             setIsDeleteOpen(false);
             setIsInsertOpen(false);
-
-            if(hasCriticalNode){
-                handleBalancing();
-            }
         }
     };
 
@@ -81,6 +84,8 @@ const AVLPlayground = () => {
         setHeight(0);
         setIsDeleteOpen(false);
         setIsInsertOpen(false);
+        setIsColored(false);
+        setShouldBalance(false);
     }
 
     const handleGenerateTree = () => {
@@ -101,6 +106,8 @@ const AVLPlayground = () => {
         setDeleteValue("");
         setIsDeleteOpen(false);
         setIsInsertOpen(false);
+        setIsColored(false);
+        setShouldBalance(false);
     }
 
     return ( 
@@ -115,8 +122,10 @@ const AVLPlayground = () => {
                         onChange={(e) => setValue(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && handleInsert()}
                         placeholder="Unesi broj"
+                        disabled={shouldBalance}
                     />
-                    <button onClick={handleInsert} className='rounded-lg p-2 bg-amber-200 text-xl w-24 mx-auto mt-4'>Umetni</button>            
+                    {!shouldBalance && <button onClick={handleInsert} className='rounded-lg p-2 bg-amber-200 text-xl w-24 mx-auto mt-4'>Umetni</button>}
+                    {shouldBalance && <button className='mx-auto mt-4 rounded-lg p-2 bg-amber-200 opacity-30 text-xl w-24' disabled>Umetni</button>}            
                 </div>
 
                 <div className="h-fit flex flex-col pb-2 shadow-lg md:shadow md:hover:shadow-xl">
@@ -128,8 +137,10 @@ const AVLPlayground = () => {
                         onChange={(e) => setDeleteValue(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && handleDelete()}
                         placeholder="Unesi broj"
+                        disabled={shouldBalance}
                     />
-                    <button onClick={handleDelete} className='rounded-lg p-2 bg-amber-200 text-xl w-24 mx-auto mt-4'>Obriši</button>
+                    {!shouldBalance && <button onClick={handleDelete} className='rounded-lg p-2 bg-amber-200 text-xl w-24 mx-auto mt-4'>Obriši</button>}
+                    {shouldBalance && <button className='mx-auto mt-4 rounded-lg p-2 bg-amber-200 opacity-30 text-xl w-24' disabled>Obriši</button>}            
                 </div>
 
                 <div className="h-fit flex flex-col pb-2 shadow-lg md:shadow md:hover:shadow-xl">
@@ -143,6 +154,21 @@ const AVLPlayground = () => {
                     <div className="py-4"></div>
                     <button onClick={handleGenerateTree} className='rounded-lg p-2 bg-amber-200 text-xl w-24 mx-auto mt-4'>Generiši</button>
                 </div>
+
+                <div className="h-fit flex flex-col pb-2 shadow-lg md:shadow md:hover:shadow-xl">
+                    <h2 className="mt-6 font-semibold mx-auto text-xl">Balansiraj drvo</h2>
+                    <div className="py-4"></div>
+                    {shouldBalance && <button onClick={handleBalancing} className='rounded-lg p-2 bg-amber-200 text-xl w-24 mx-auto mt-4'>Balansiraj</button>}
+                    {!shouldBalance && <button className='mx-auto mt-4 rounded-lg p-2 bg-amber-200 opacity-30 text-xl w-24' disabled>Balansiraj</button>}            
+                </div>
+
+                <div className="h-fit flex flex-col pb-2 shadow-lg md:shadow md:hover:shadow-xl">
+                    <h2 className="mt-6 font-semibold mx-auto text-xl">Resetuj boje</h2>
+                    <div className="py-4"></div>
+                    {isColored && <button onClick={handleResetColoring} className='rounded-lg p-2 bg-amber-200 text-xl w-24 mx-auto mt-4'>Resetuj</button>}
+                    {!isColored && <button className='mx-auto mt-4 rounded-lg p-2 bg-amber-200 opacity-30 text-xl w-24' disabled>Resetuj</button>}            
+                </div>
+                
             </div>
 
             <div className="overflow-auto mt-2 md:mt-0">
@@ -199,7 +225,17 @@ const AVLPlayground = () => {
                 }
             </div>
 
+            {/* <div className="">
+                <h1>Legenda</h1>
+                <p></p>
+                <p></p>
+            </div> */}
+
             <div className="md:hidden absolute w-full bottom-2 flex flex-col gap-y-4">
+                <div className="flex flex-row gap-x-4 mx-auto">
+                    {shouldBalance && !isInsertOpen && !isDeleteOpen && <button onClick={handleBalancing} className='rounded-lg py-2 bg-amber-200 text-xl w-24 my-2'>Balansiraj drvo</button>}            
+                    {isColored && !isInsertOpen && !isDeleteOpen && <button onClick={handleResetColoring} className='rounded-lg py-2 bg-amber-200 text-xl w-24 my-2'>Resetuj boje</button>}
+                </div>
                 {   isInsertOpen &&
                     <div className="h-fit mx-2 flex flex-col pb-2 shadow-lg md:shadow md:hover:shadow-xl">
                         <h2 className="mt-6 font-semibold mx-auto text-xl">Umetni novi čvor</h2>
@@ -231,9 +267,11 @@ const AVLPlayground = () => {
                     </div>
                 }
                 <div className="w-full flex flex-row gap-x-4">
-                    <button onClick={() => {setIsInsertOpen(true); setIsDeleteOpen(false);}} className='rounded-lg py-2 bg-amber-200 text-xl w-24 my-2'>Umetni čvor</button>            
-                    <button onClick={() => {setIsDeleteOpen(true); setIsInsertOpen(false);}} className='rounded-lg py-2 bg-amber-200 text-xl w-24 my-2'>Obriši čvor</button>            
-                    <button onClick={handleDeleteTree} className='rounded-lg py-2 bg-amber-200 text-xl w-24 my-2'>Obriši drvo</button>            
+                    {!shouldBalance && <button onClick={() => {setIsInsertOpen(true); setIsDeleteOpen(false);}} className='rounded-lg py-2 bg-amber-200 text-xl w-24 my-2'>Umetni čvor</button>}
+                    {shouldBalance && <button className='mx-auto my-2 rounded-lg py-2 bg-amber-200 opacity-30 text-xl w-24' disabled>Umetni čvor</button>}           
+                    {!shouldBalance && <button onClick={() => {setIsDeleteOpen(true); setIsInsertOpen(false);}} disabled={shouldBalance} className='rounded-lg py-2 bg-amber-200 text-xl w-24 my-2'>Obriši čvor</button>}            
+                    {shouldBalance && <button className='mx-auto my-2 rounded-lg py-2 bg-amber-200 opacity-30 text-xl w-24' disabled>Obriši čvor</button>}
+                    <button onClick={handleDeleteTree} className='rounded-lg py-2 bg-amber-200 text-xl w-24 my-2' >Obriši drvo</button>            
                     <button onClick={handleGenerateTree} className='rounded-lg py-2 bg-amber-200 text-xl w-24 my-2'>Generiši drvo</button>            
                 </div>
             </div>
