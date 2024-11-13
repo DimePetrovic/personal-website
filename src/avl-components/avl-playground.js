@@ -112,7 +112,7 @@ const AVLPlayground = () => {
 
     return ( 
         <div className="grow flex flex-col w-full relative">
-            <div className='hidden gap-4 mx-2 mb-8 md:grid md:grid-cols-2 mt-2'>
+            <div className='hidden gap-4 mx-2 mb-8 md:grid md:grid-cols-3 mt-2'>
                 <div className="h-fit flex flex-col pb-2 shadow-lg md:shadow md:hover:shadow-xl">
                     <h2 className="mt-6 font-semibold mx-auto text-xl">Umetni novi čvor</h2>
                     <input
@@ -145,7 +145,7 @@ const AVLPlayground = () => {
 
                 <div className="h-fit flex flex-col pb-2 shadow-lg md:shadow md:hover:shadow-xl">
                     <h2 className="mt-6 font-semibold mx-auto text-xl">Obriši drvo</h2>
-                    <div className="py-4"></div>
+                    <div className="py-6 mb-[0.125rem]"></div>
                     <button onClick={handleDeleteTree} className='rounded-lg p-2 bg-amber-200 text-xl w-24 mx-auto mt-4'>Obriši</button>
                 </div>
 
@@ -165,13 +165,13 @@ const AVLPlayground = () => {
                 <div className="h-fit flex flex-col pb-2 shadow-lg md:shadow md:hover:shadow-xl">
                     <h2 className="mt-6 font-semibold mx-auto text-xl">Resetuj boje</h2>
                     <div className="py-4"></div>
-                    {isColored && <button onClick={handleResetColoring} className='rounded-lg p-2 bg-amber-200 text-xl w-24 mx-auto mt-4'>Resetuj</button>}
-                    {!isColored && <button className='mx-auto mt-4 rounded-lg p-2 bg-amber-200 opacity-30 text-xl w-24' disabled>Resetuj</button>}            
+                    {isColored && !shouldBalance && <button onClick={handleResetColoring} className='rounded-lg p-2 bg-amber-200 text-xl w-24 mx-auto mt-4'>Resetuj</button>}
+                    {(!isColored || shouldBalance) && <button className='mx-auto mt-4 rounded-lg p-2 bg-amber-200 opacity-30 text-xl w-24' disabled>Resetuj</button>}            
                 </div>
                 
             </div>
 
-            <div className="overflow-auto mt-2 md:mt-0">
+            <div className="overflow-auto mt-2 md:mt-0 mb-40 md:mb-0">
                 {   
                     positions &&
                     <svg width={width} height={height} className="mx-auto my-[20px]">
@@ -186,7 +186,7 @@ const AVLPlayground = () => {
                                 x1={node.x + width/2} y1={node.y + 20}
                                 x2={leftChild.x + height/2} y2={leftChild.y + 20}
                                 stroke="black"
-                                strokeWidth="2"
+                                strokeWidth="3"
                                 />
                             )}
                             {rightChild && (
@@ -194,6 +194,7 @@ const AVLPlayground = () => {
                                 x1={node.x + width/2} y1={node.y + 20}
                                 x2={rightChild.x + width/2} y2={rightChild.y + 20}
                                 stroke="black"
+                                strokeWidth="3"
                                 />
                             )}
                             </React.Fragment>
@@ -234,7 +235,7 @@ const AVLPlayground = () => {
             <div className="md:hidden absolute w-full bottom-2 flex flex-col gap-y-4">
                 <div className="flex flex-row gap-x-4 mx-auto">
                     {shouldBalance && !isInsertOpen && !isDeleteOpen && <button onClick={handleBalancing} className='rounded-lg py-2 bg-amber-200 text-xl w-24 my-2'>Balansiraj drvo</button>}            
-                    {isColored && !isInsertOpen && !isDeleteOpen && <button onClick={handleResetColoring} className='rounded-lg py-2 bg-amber-200 text-xl w-24 my-2'>Resetuj boje</button>}
+                    {isColored && !shouldBalance && !isInsertOpen && !isDeleteOpen && <button onClick={handleResetColoring} className='rounded-lg py-2 bg-amber-200 text-xl w-24 my-2'>Resetuj boje</button>}
                 </div>
                 {   isInsertOpen &&
                     <div className="h-fit mx-2 flex flex-col pb-2 shadow-lg md:shadow md:hover:shadow-xl">

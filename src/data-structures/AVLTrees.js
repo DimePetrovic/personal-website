@@ -163,39 +163,59 @@ class AVLTree {
         return { newPositions: positions, newWidth: totalWidth, newHeight: totalHeight };
     }
     
-    balanceTree(node) {
-        if (!node) return node;
-    
-        node.height = Math.max(this.getHeight(node.left), this.getHeight(node.right)) + 1;
-    
-        const balanceFactor = this.getBalanceFactor(node);
-    
-        if (balanceFactor > 1 && this.getBalanceFactor(node.left) >= 0) {
-            return this.rotateRight(node);
-        }
-    
-        if (balanceFactor < -1 && this.getBalanceFactor(node.right) <= 0) {
-            return this.rotateLeft(node);
-        }
-    
-        if (balanceFactor > 1 && this.getBalanceFactor(node.left) < 0) {
-            node.left = this.rotateLeft(node.left);
-            return this.rotateRight(node);
-        }
-    
-        if (balanceFactor < -1 && this.getBalanceFactor(node.right) > 0) {
-            node.right = this.rotateRight(node.right);
-            return this.rotateLeft(node);
-        }
-    
-        return node;
-    }
-
     balanceAfterInsert() {
-        const newTree = new AVLTree();
-        const newRoot = this.root = this.balanceTree(this.root);
-        newTree.root = newRoot;
-        return newTree;
+        const findCriticalNode = (node) => {
+            if (!node) return null;
+            if (node.border === "red") return node;
+            return findCriticalNode(node.left) || findCriticalNode(node.right);
+        };
+    
+        const criticalNode = findCriticalNode(this.root);
+    
+        if (!criticalNode) return this;
+    
+        const balanceSubtree = (node) => {
+            if (!node) return node;
+    
+            node.height = Math.max(this.getHeight(node.left), this.getHeight(node.right)) + 1;
+            const balanceFactor = this.getBalanceFactor(node);
+    
+            if (balanceFactor > 1 && this.getBalanceFactor(node.left) >= 0) {
+                return this.rotateRight(node);
+            }
+            if (balanceFactor < -1 && this.getBalanceFactor(node.right) <= 0) {
+                return this.rotateLeft(node);
+            }
+            if (balanceFactor > 1 && this.getBalanceFactor(node.left) < 0) {
+                node.left = this.rotateLeft(node.left);
+                return this.rotateRight(node);
+            }
+            if (balanceFactor < -1 && this.getBalanceFactor(node.right) > 0) {
+                node.right = this.rotateRight(node.right);
+                return this.rotateLeft(node);
+            }
+            return node;
+        };
+    
+        const parentNode = this.findParent(this.root, criticalNode);
+    
+        if (!parentNode) {
+            this.root = balanceSubtree(this.root);
+        } else {
+            if (parentNode.left === criticalNode) {
+                parentNode.left = balanceSubtree(criticalNode);
+            } else {
+                parentNode.right = balanceSubtree(criticalNode);
+            }
+        }
+    
+        return this;
+    }
+    
+    findParent(root, node) {
+        if (!root || root === node) return null;
+        if (root.left === node || root.right === node) return root;
+        return this.findParent(root.left, node) || this.findParent(root.right, node);
     }
     
 
