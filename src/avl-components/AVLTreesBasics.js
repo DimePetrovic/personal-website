@@ -8,6 +8,7 @@ const AVLTreesBasics = () => {
 
             <p className="mt-4 text-lg mx-2 md:mx-auto">Dodavanje čvora u drvo je implementirano tako da se čvor prvo dodaje u drvo kao da je reč o uobičajenom nebalansiranom uređenom binarnom drvetu.</p>
             <p className="mt-2 text-lg mx-2 md:mx-auto">Po dodavanju čvora, <span className="text-green-500">novi čvor</span> se označava <span className="text-green-500">zelenom</span> bojom. Ukoliko je dodavanjem čvora, drvo prestalo da bude balansirano, <span className="text-red-500">kritični čvor</span> se označava <span className="text-red-500">crvenom</span> bojom.</p>
+            <p className="mt-2 text-lg mx-2 md:mx-auto">Ukoliko je drvo van balansa, nije moguće dodavati nove čvorove u drvo, ili ih brisati dok se drvo ne balansira!</p>
             {/* <div className="">
                 <p className=""></p>
                 <p className=""></p>
